@@ -1,0 +1,40 @@
+// 문제 : 대충 만든 자판
+// 결과 :  / 속도: 0 / 메모리 : 0
+// 제출시각 : 24-01-12  20:17:22
+def extracter(string, uniqueChar, numOfAlpabet):
+    for c in string:
+        try:
+            uniqueChar.index(c);
+            i = string.index(c) + 1;
+            if numOfAlpabet[ord(c) - 65] == 0 or i < numOfAlpabet[ord(c) - 65]:
+                numOfAlpabet[ord(c) - 65] = i;
+        except ValueError:
+            uniqueChar.append(c);
+            i = string.index(c) + 1;
+            if numOfAlpabet[ord(c) - 65] == 0 or i < numOfAlpabet[ord(c) - 65]:
+                numOfAlpabet[ord(c) - 65] = i;
+    return uniqueChar , numOfAlpabet;
+            
+​
+def solution(keymap, targets):
+    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    numOfAlpabet = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    uniqueChar = [];
+    sumArray = [];
+    sum = 0;
+    for s in keymap:
+        uniqueChar, numOfAlpabet = extracter(s, uniqueChar, numOfAlpabet);
+    for s in targets:
+        for c in s:
+            if numOfAlpabet[ord(c) - 65] == 0 : 
+                sum = -1;
+                break;
+            else:
+                sum += numOfAlpabet[ord(c) - 65];
+        sumArray.append(sum);
+        sum = 0;
+    return sumArray;
+        
+​
+​
+​
