@@ -1,0 +1,50 @@
+// 문제 : permutations
+// 결과 : Accepted / 속도: 46ms / 메모리 : 17.27MB
+// 제출시각 : 24-01-12  20:15:26
+class Solution:
+
+
+
+    # [1,2,3]이 있으면 1부터 시작해서 나머지 조회, 2부터 시작해서 나머지 조회, 3부터 시작해서 나머지 조회를 해야된다.
+
+    # 그럼 하나씩 넣어주면 되는거 아닌가?
+
+    def permute(self, nums: list[int]) -> list[list[int]]:
+
+
+
+        #스택에는 index값과 중간결과를 가지고 있을 빈 배열을 하나 넣어준다.
+
+        stack = [[]]
+
+        result = []
+
+
+
+        while stack:
+
+            arr = stack.pop()
+
+
+
+            if len(nums) == len(arr):
+
+                result.append(arr[:])
+
+                continue
+
+
+
+            for n in nums:
+
+                if n not in arr:
+
+                    arr.append(n)
+
+                    stack.append(arr[:])
+
+                    arr.pop()
+
+
+
+        return result
